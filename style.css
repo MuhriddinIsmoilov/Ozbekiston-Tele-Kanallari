@@ -8,48 +8,114 @@
 body {
   background-color: #080a12;
   color: #ffffff;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .background-glow {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(0, 242, 254, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
-  top: -150px;
-  left: -150px;
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+  top: -50px;
+  right: -50px;
   pointer-events: none;
 }
 
 .app-container {
   display: flex;
-  width: 100%;
-  height: 100vh;
-  z-index: 1;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px;
+  gap: 12px;
 }
 
-/* Sidebar */
-.sidebar {
-  width: 320px;
-  background: rgba(16, 20, 38, 0.6);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 24px;
+/* Header */
+.top-header {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 22px;
+  gap: 10px;
+  font-size: 18px;
   font-weight: 700;
   color: #00f2fe;
+}
+
+.live-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #ff4b4b;
+  background: rgba(255, 75, 75, 0.15);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.live-badge .dot {
+  width: 6px;
+  height: 6px;
+  background: #ff4b4b;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #ff4b4b;
+}
+
+/* Content Layout */
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Video Player */
+.glass-player-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.player-header h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #e1e3ec;
+}
+
+.video-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  position: relative;
+}
+
+video, iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  object-fit: contain;
+}
+
+/* Sidebar & Channels */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .search-box {
@@ -67,99 +133,54 @@ body {
 .search-box input {
   width: 100%;
   padding: 12px 14px 12px 40px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   color: #fff;
+  font-size: 14px;
   outline: none;
 }
 
 .channel-list {
-  flex: 1;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
+  max-height: 350px;
+  overflow-y: auto;
 }
 
 .channel-item {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 12px 16px;
-  background: rgba(255, 255, 255, 0.03);
+  gap: 12px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 14px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.25s ease;
+  font-size: 14px;
+  transition: all 0.2s ease;
 }
 
 .channel-item:hover, .channel-item.active {
   background: rgba(0, 242, 254, 0.15);
   border-color: rgba(0, 242, 254, 0.4);
-}
-
-.channel-item i {
-  font-size: 18px;
   color: #00f2fe;
 }
 
-/* Main Player */
-.main-player {
-  flex: 1;
-  padding: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.channel-item i {
+  color: #00f2fe;
 }
 
-.glass-player-card {
-  width: 100%;
-  max-width: 1000px;
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 24px;
-  padding: 20px;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
-}
+/* Kompyuter ekrani uchun moslashuv (Desktop layout) */
+@media (min-width: 768px) {
+  .content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    align-items: start;
+  }
 
-.player-header {
-  margin-bottom: 16px;
-}
-
-.live-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  font-weight: 700;
-  color: #ff4b4b;
-  background: rgba(255, 75, 75, 0.15);
-  padding: 4px 10px;
-  border-radius: 20px;
-  margin-bottom: 6px;
-}
-
-.live-badge .dot {
-  width: 6px;
-  height: 6px;
-  background: #ff4b4b;
-  border-radius: 50%;
-  box-shadow: 0 0 6px #ff4b4b;
-}
-
-.video-wrapper {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: 16px;
-  overflow: hidden;
-  background: #000;
-}
-
-video {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  .channel-list {
+    max-height: 500px;
+  }
 }
