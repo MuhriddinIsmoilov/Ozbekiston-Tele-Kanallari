@@ -2,47 +2,52 @@
 <html lang="uz">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UzTV — Online Telekanallar Portali</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>UzTV — Online Telekanallar</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <!-- HLS Video Player Kutubxonasi -->
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
   <div class="background-glow"></div>
 
   <div class="app-container">
-    <!-- Chap Tomon: Kanallar Ro'yxati (Sidebar) -->
-    <aside class="sidebar">
+    <!-- Yuqori panel (Sarlavha) -->
+    <header class="top-header">
       <div class="brand">
         <i class="fa-solid fa-tv"></i>
         <span>UzTV Online</span>
       </div>
-      <div class="search-box">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="searchInput" placeholder="Kanalni qidirish..." onkeyup="filterChannels()">
-      </div>
-      <div class="channel-list" id="channelList">
-        <!-- Kanallar JavaScript orqali yuklanadi -->
-      </div>
-    </aside>
+      <div class="live-badge"><span class="dot"></span> LIVE</div>
+    </header>
 
-    <!-- O'ng Tomon: Video Pleyer va Glass Container -->
-    <main class="main-player">
-      <div class="glass-player-card">
-        <div class="player-header">
-          <div class="channel-info">
-            <span class="live-badge"><span class="dot"></span> ONLAYN</span>
-            <h2 id="currentChannelTitle">O'zbekiston 24</h2>
+    <div class="content-wrapper">
+      <!-- Pleyer qismi (Tepaga joylashtirildi) -->
+      <main class="main-player">
+        <div class="glass-player-card">
+          <div class="player-header">
+            <h2 id="currentChannelTitle">Mahalla TV</h2>
+          </div>
+
+          <div class="video-wrapper" id="videoWrapper">
+            <video id="videoPlayer" controls playsinline autoplay></video>
+            <!-- Zaxira iframe (Video oqimi bloklanganda avto-ishlaydi) -->
+            <iframe id="iframePlayer" allow="autoplay; fullscreen" style="display:none;"></iframe>
           </div>
         </div>
+      </main>
 
-        <div class="video-wrapper">
-          <video id="videoPlayer" controls autoplay poster=""></video>
+      <!-- Kanallar ro'yxati (Pastga / Yonga moslashuvchi) -->
+      <aside class="sidebar">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" placeholder="Kanalni qidirish..." onkeyup="filterChannels()">
         </div>
-      </div>
-    </main>
+        <div class="channel-list" id="channelList">
+          <!-- Kanallar JS orqali chiqadi -->
+        </div>
+      </aside>
+    </div>
   </div>
 
   <script src="app.js"></script>
